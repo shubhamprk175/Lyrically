@@ -1,5 +1,5 @@
 # Lyrically
-A Django application for song's lyrics using music API
+A Django application for song's lyrics using musicdemons API
 <p align="center">
   
 
