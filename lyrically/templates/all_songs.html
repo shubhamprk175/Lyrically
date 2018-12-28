@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table table-hover">
+<thead class="thead-dark">
+<tr>
+  <th scope="col">Song Title</th>
+  <th scope="col">Release Date</th>
+  <th scope="col">Artist Name</th>
+  <th scope="col">Play</th>
+</tr>
+</thead>
+<tbody>
+{% for song, ytb_url in all_songs %}
+
+<tr>
+  <td>{{song.title}}</td>
+  <td>{{song.released}}</td>
+  <td>{% for artist in song.artists %}{{artist.name}},&nbsp{% endfor %}</td>
+  <td><a href="{{ytb_url}}">Play on Youtube</a></td>
+</tr>
+
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

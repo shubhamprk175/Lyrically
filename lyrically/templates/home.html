@@ -1,0 +1,48 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<main role="main">
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1 class="jumbotron-heading">Billboard Top 12</h1>
+    <p class="lead text-muted">These are the recent songs that are making the buzz and are love to listen to. We use Machine Learning to detect your favourite song</p>
+    <p>
+      <a href="{% url 'all_songs' %}" class="btn btn-primary my-2">Collection of All Songs</a>
+      <a href="#" class="btn btn-secondary my-2">All Artists</a>
+    </p>
+  </div>
+</section>
+</main>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row">
+        {% for song, ytb_thumbs, ytb_url in songs %}
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ytb_thumbs}}" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect fill="#55595c" width="100%" height="100%"/></img>
+          <div class="card-body">
+            <p class="card-text">{{song.title}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <form action="{% url 'lyrics' %}" method="post">
+                    {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-outline-secondary" name="lyrics_req" value="{{song.id}}">Lyrics</button>
+                </form>
+                <button type="button" class="btn btn-sm btn-outline-secondary"><a style="color: inherit" href="{{ytb_url}}" target='_blank'>Play</a></button>
+              </div>
+              <small class="text-muted">9 mins</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{{songs}}
+
+{% endblock %}
